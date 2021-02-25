@@ -39,6 +39,7 @@
     "onCommand:sortLines.sortLinesNatural",
     "onCommand:sortLines.sortLinesUnique",
     "onCommand:sortLines.removeDuplicateLines",
+    "onCommand:sortLines.sortSkipOpeningSpecialCharacter",
     "onCommand:sortLines.sortLinesShuffle"
   ],
   "main": "./out/extension",
@@ -87,6 +88,10 @@
       {
         "command": "sortLines.removeDuplicateLines",
         "title": "Sort lines (remove duplicate lines)"
+      },
+      {
+        "command": "sortLines.sortSkipOpeningSpecialCharacter",
+        "title": "Sort lines (skip opening special characters)"
       },
       {
         "command": "sortLines.sortLinesShuffle",

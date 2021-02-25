@@ -99,6 +99,16 @@ function naturalCompare(a: string, b: string): number {
   return intlCollator.compare(a, b);
 }
 
+function skipOpeningSpecialCharacterCompare(a: string, b: string): number {
+  if (a.charAt(0) == '[' || a.charAt(0) == '(' || a.charAt(0) == '{') {
+    a = a.slice(1);
+  }
+  if (b.charAt(0) == '[' || b.charAt(0) == '(' || b.charAt(0) == '{') {
+    b = b.slice(1);
+  }
+  return a.localeCompare(b, undefined, {sensitivity: 'base'});
+}
+
 function getVariableCharacters(line: string): string {
   const match = line.match(/(.*)=/);
   if (!match) {
@@ -131,6 +141,7 @@ const transformerSequences = {
   sortVariableLengthReverse: [makeSorter(variableLengthReverseCompare)],
   sortNatural: [makeSorter(naturalCompare)],
   sortShuffle: [shuffleSorter],
+  sortSkipOpeningSpecialCharacter: [makeSorter(skipOpeningSpecialCharacterCompare)],
   removeDuplicateLines: [removeDuplicates]
 };
 
@@ -145,4 +156,5 @@ export const sortVariableLength = () => sortActiveSelection(transformerSequences
 export const sortVariableLengthReverse = () => sortActiveSelection(transformerSequences.sortVariableLengthReverse);
 export const sortNatural = () => sortActiveSelection(transformerSequences.sortNatural);
 export const sortShuffle = () => sortActiveSelection(transformerSequences.sortShuffle);
+export const sortSkipOpeningSpecialCharacter = () => sortActiveSelection(transformerSequences.sortSkipOpeningSpecialCharacter);
 export const removeDuplicateLines = () => sortActiveSelection(transformerSequences.removeDuplicateLines);
